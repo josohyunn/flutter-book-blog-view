@@ -16,10 +16,10 @@ class UserRepository {
       // 1. ResponseDTO 파싱하기(dynamic타입 - 실제 들어있는 타입은 Map타입)
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-      // 2. User객체로 파싱하기
+      // 2. User객체로 파싱하기(회원가입 에서는 프론트에서 데이터를 받아오기만 하면 되기 때문에 User로 파싱할 필요가 없다.)
       // User user = User.fromJson(responseDTO.data);
 
-      // // 3. responseDTO는 파싱 완료된 responseDTO
+      // 3. responseDTO는 파싱 완료된 responseDTO
       // responseDTO.data = User.fromJson(responseDTO.data);
 
       return responseDTO;
@@ -44,6 +44,7 @@ class UserRepository {
       // // 3. responseDTO는 파싱 완료된 responseDTO
       responseDTO.data = User.fromJson(responseDTO.data);
 
+      // 로그인 하면 토큰을 받아야 하기 때문에 3번을 실행하는 것.(3번 : 받아오는 건 Map형이기 때문에 파싱해주는 작업)
       final jwt = response.headers["Autorization"];
 
       if (jwt != null) {

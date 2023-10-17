@@ -8,6 +8,7 @@ class ResponseDTO {
 
   ResponseDTO(this.code, this.msg, this.data);
 
+  // json으로부터 데이터를 받는다.(백 -> 프론트)
   ResponseDTO.fromJson(Map<String, dynamic> json)
       : code = json["code"],
         msg = json["msg"],
