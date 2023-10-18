@@ -58,7 +58,19 @@ class SessionUser {
   }
 
   Future<void> logout() async {
-    //
+    this.jwt = null;
+    this.isLogin = false;
+    this.user = null;
+
+    // jwt는 로그아웃할 때 서버측으로 요청할 필요가 없음
+    // await 안붙이면 jwt가 삭제되기 전에 로그인 페이지 가서 자동로그인이 된다.
+    await secureStorage.delete(key: "jwt");
+
+    Navigator.pushNamedAndRemoveUntil(
+        mContext!,
+        "/login",
+        (route) =>
+            false); // pushNamedAndRemoveUntil의 false : 다날리고 이동(pop해버리면 login페이지가 두개 겹쳐있기 때문)
   }
 }
 
