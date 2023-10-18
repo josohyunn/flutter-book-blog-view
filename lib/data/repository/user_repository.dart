@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto.dart';
 import 'package:flutter_blog/data/dto/user_request.dart';
@@ -10,7 +11,8 @@ class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     // 통신은 무조건 try-catch 있어야됨
     try {
-      final response =
+      // dynamic -> http body
+      Response<dynamic> response =
           await dio.post("/join", data: requestDTO.toJson()); // 통신 끝
       // ※ ResponseDTO<T>로 못받는 이유 : ResponseDTO에서 파싱을 해주어야 하는데 들어오는 데이터가 어떤 데이터타입인지 모르니까 파싱을 정의할 수 없기 때문에
       // 1. ResponseDTO 파싱하기(dynamic타입 - 실제 들어있는 타입은 Map타입)
@@ -32,7 +34,7 @@ class UserRepository {
   Future<ResponseDTO> fetchLogin(LoginReqDTO requestDTO) async {
     // 통신은 무조건 try-catch 있어야됨
     try {
-      final response =
+      Response<dynamic> response =
           await dio.post("/login", data: requestDTO.toJson()); // 통신 끝
       // ※ ResponseDTO<T>로 못받는 이유 : ResponseDTO에서 파싱을 해주어야 하는데 들어오는 데이터가 어떤 데이터타입인지 모르니까 파싱을 정의할 수 없기 때문에
       // 1. ResponseDTO 파싱하기(dynamic타입 - 실제 들어있는 타입은 Map타입)

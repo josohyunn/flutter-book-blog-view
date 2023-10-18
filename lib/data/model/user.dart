@@ -29,4 +29,9 @@ class User {
         email = json["email"],
         created = DateFormat("yyyy-mm-dd").parse(json["created"]), // 3
         updated = DateFormat("yyyy-mm-dd").parse(json["updated"]);
+
+  @override
+  String toString() {
+    return 'User{id: $id, username: $username, email: $email, created: $created, updated: $updated}';
+  }
 }
