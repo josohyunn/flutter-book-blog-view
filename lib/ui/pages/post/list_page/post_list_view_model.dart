@@ -37,7 +37,7 @@ class PostListViewModel extends StateNotifier<PostListModel?> {
     SessionUser sessionUser = ref.read(sessionProvider);
 
     ResponseDTO responseDTO =
-        await PostRepository().fetchPost(sessionUser.jwt!, dto);
+        await PostRepository().savePost(sessionUser.jwt!, dto);
 
     if (responseDTO.code == 1) {
       Post newPost = responseDTO
